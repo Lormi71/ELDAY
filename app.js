@@ -9,6 +9,21 @@
   const progressEl = $("#progress");
   const submitBtn = $("#submit");
 
+  // Пробует загрузить картинку и с другими расширениями (.jpg/.png/.jpeg/.webp)
+  const EXTS = [".jpg", ".png", ".jpeg", ".webp"];
+  function tryLoad(src, ok, fail) {
+    const base = src.replace(/\.[^./]+$/, "");
+    const list = [src].concat(EXTS.map((e) => base + e).filter((s) => s !== src));
+    let i = 0;
+    (function next() {
+      if (i >= list.length) { if (fail) fail(); return; }
+      const im = new Image();
+      im.onload = () => ok(im);
+      im.onerror = next;
+      im.src = list[i++];
+    })();
+  }
+
   function esc(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
@@ -19,13 +34,20 @@
       sec.className = "category";
       sec.innerHTML = `
         <div class="cat-head">
-          ${cat.icon ? `<img class="cat-icon" src="${esc(cat.icon)}" alt="" onerror="this.remove()">` : ""}
           <div class="cat-num">НОМИНАЦИЯ ${i + 1}</div>
           <h2 class="cat-title">${esc(cat.title)}</h2>
           <p class="cat-desc">${esc(cat.desc || "")}</p>
         </div>
         <div class="${cat.textOnly ? "options" : "nominees"}"></div>`;
       const box = sec.querySelector(".options, .nominees");
+
+      if (cat.icon) {
+        tryLoad(cat.icon, (im) => {
+          im.className = "cat-icon";
+          im.alt = "";
+          sec.querySelector(".cat-head").prepend(im);
+        });
+      }
 
       cat.nominees.forEach((n) => {
         const btn = document.createElement("button");
@@ -38,13 +60,11 @@
           btn.innerHTML = `<div class="ph"></div><div class="name">${esc(n.name)}</div>` +
             (n.sub ? `<div class="sub">${esc(n.sub)}</div>` : "");
           const ph = btn.querySelector(".ph");
-          const img = new Image();
-          img.alt = n.name;
-          img.onload = () => ph.appendChild(img);
-          img.onerror = () => {
-            ph.innerHTML = `<span class="initial">${esc(n.name.charAt(0))}</span>`;
-          };
-          img.src = n.img;
+          tryLoad(
+            n.img,
+            (img) => { img.alt = n.name; ph.appendChild(img); },
+            () => { ph.innerHTML = `<span class="initial">${esc(n.name.charAt(0))}</span>`; }
+          );
         }
         const label = n.sub ? n.name + " (" + n.sub + ")" : n.name;
         btn.addEventListener("click", () => select(cat.id, label, box, btn));
