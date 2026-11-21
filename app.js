@@ -19,6 +19,7 @@
       sec.className = "category";
       sec.innerHTML = `
         <div class="cat-head">
+          ${cat.icon ? `<img class="cat-icon" src="${esc(cat.icon)}" alt="" onerror="this.remove()">` : ""}
           <div class="cat-num">НОМИНАЦИЯ ${i + 1}</div>
           <h2 class="cat-title">${esc(cat.title)}</h2>
           <p class="cat-desc">${esc(cat.desc || "")}</p>
@@ -34,7 +35,8 @@
         if (cat.textOnly) {
           btn.textContent = n.name;
         } else {
-          btn.innerHTML = `<div class="ph"></div><div class="name">${esc(n.name)}</div>`;
+          btn.innerHTML = `<div class="ph"></div><div class="name">${esc(n.name)}</div>` +
+            (n.sub ? `<div class="sub">${esc(n.sub)}</div>` : "");
           const ph = btn.querySelector(".ph");
           const img = new Image();
           img.alt = n.name;
@@ -44,7 +46,8 @@
           };
           img.src = n.img;
         }
-        btn.addEventListener("click", () => select(cat.id, n.name, box, btn));
+        const label = n.sub ? n.name + " (" + n.sub + ")" : n.name;
+        btn.addEventListener("click", () => select(cat.id, label, box, btn));
         box.appendChild(btn);
       });
       root.appendChild(sec);
