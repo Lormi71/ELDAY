@@ -18,28 +18,37 @@
   </header>
 
   <main id="vote">
-    <section id="who" class="panel">
-      <label for="nick">Твой ник в Discord</label>
-      <input id="nick" type="text" maxlength="40" placeholder="например, @nickname" autocomplete="off">
-      <p class="hint">Один человек — один бюллетень. Можно пропустить любую номинацию.</p>
+    <section id="login" class="panel" hidden>
+      <label>Вход</label>
+      <p>Чтобы проголосовать, войди через Discord. Один аккаунт — один голос.</p>
+      <button id="loginBtn" class="btn" type="button">Войти через Discord</button>
     </section>
 
-    <div id="categories"></div>
+    <div id="ballot">
+      <section id="who" class="panel">
+        <label for="nick">Твой ник в Discord</label>
+        <input id="nick" type="text" maxlength="40" placeholder="например, @nickname" autocomplete="off">
+        <p class="hint">Один человек — один бюллетень. Можно пропустить любую номинацию.</p>
+      </section>
 
-    <section class="panel submit-panel">
-      <p id="progress" class="hint"></p>
-      <button id="submit" class="btn">Отправить голос</button>
-      <p id="error" class="error" role="alert"></p>
-    </section>
+      <div id="categories"></div>
+
+      <section class="panel submit-panel">
+        <p id="progress" class="hint"></p>
+        <button id="submit" class="btn">Отправить голос</button>
+        <p id="error" class="error" role="alert"></p>
+      </section>
+    </div>
 
     <section id="thanks" class="panel thanks" hidden>
       <h2>Голос принят</h2>
-      <p>Результаты объявят на церемонии в Discord.</p>
+      <p id="thanksText">Результаты объявят на церемонии в Discord.</p>
     </section>
   </main>
 
   <footer>ELDAY · сделано для своих</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>

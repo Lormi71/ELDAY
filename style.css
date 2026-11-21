@@ -111,6 +111,9 @@ main{max-width:1000px;margin:0 auto;padding:20px 20px 80px}
 .card.text{padding:26px 20px;font:700 1.2rem 'Playfair Display',serif}
 
 .submit-panel{text-align:center}
+#login{text-align:center}
+#login p{color:var(--muted);margin-bottom:18px}
+.panel input[readonly]{opacity:.75;cursor:default}
 .error{color:#ff6b5a;margin-top:14px;min-height:1.2em}
 .thanks{text-align:center;border-color:var(--red);box-shadow:0 0 40px rgba(255,59,29,.3)}
 .thanks h2{font:900 2.4rem 'Playfair Display',serif;color:var(--gold);margin-bottom:10px}
