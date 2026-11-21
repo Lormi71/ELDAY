@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ELDAY — голосование</title>
+  <meta name="description" content="Премия ELDAY. Голосуй за лучших на сервере.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="curtains" aria-hidden="true">
+    <div class="banner left"><span>W</span></div>
+    <div class="banner right"><span>W</span></div>
+  </div>
+
+  <header class="hero">
+    <h1 class="logo">ELDAY</h1>
+    <div class="trophy" aria-hidden="true">
+      <svg viewBox="0 0 120 160" width="120" height="160">
+        <defs>
+          <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffb347"/>
+            <stop offset=".5" stop-color="#ff3b1d"/>
+            <stop offset="1" stop-color="#8a0d0d"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#cfd3d8" stroke-width="3" fill="#cfd3d8">
+          <polygon points="60,4 66,30 54,30"/><polygon points="4,52 30,56 30,66"/>
+          <polygon points="116,52 90,56 90,66"/><polygon points="22,18 40,36 32,44"/>
+          <polygon points="98,18 80,36 88,44"/>
+        </g>
+        <path d="M60 110 C20 80 12 50 36 40 C48 36 56 42 60 50 C64 42 72 36 84 40 C108 50 100 80 60 110Z" fill="url(#gem)" stroke="#ffd2a0" stroke-width="2"/>
+        <path d="M60 110 L60 150 M45 150 H75" stroke="#cfd3d8" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="subtitle">Главная премия сервера. Выбери достойных.</p>
+    <a class="cta" href="#vote">Начать голосование</a>
+  </header>
+
+  <main id="vote">
+    <section id="who" class="panel">
+      <label for="nick">Твой ник в Discord</label>
+      <input id="nick" type="text" maxlength="40" placeholder="например, @nickname" autocomplete="off">
+      <p class="hint">Один человек — один бюллетень. Можно пропустить любую номинацию.</p>
+    </section>
+
+    <div id="categories"></div>
+
+    <section class="panel submit-panel">
+      <p id="progress" class="hint"></p>
+      <button id="submit" class="btn">Отправить голос</button>
+      <p id="error" class="error" role="alert"></p>
+    </section>
+
+    <section id="thanks" class="panel thanks" hidden>
+      <h2>Голос принят</h2>
+      <p>Результаты объявят на церемонии в Discord.</p>
+    </section>
+  </main>
+
+  <footer>ELDAY · сделано для своих</footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
