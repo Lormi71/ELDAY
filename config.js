@@ -7,7 +7,7 @@
 // 2) Фотки номинантов лежат в папке img/.
 //
 window.ELDAY_CONFIG = {
-  webhookUrl: "",
+  webhookUrl: "https://discord.com/api/webhooks/1573750118455185429/SzI1TVjOBYmM3JA8NQTZY4PMHfb8QfaPRtvwECNT-5YMXI1EKodzHvesdGprrDW2-FS2",
 
   categories: [
     {
